@@ -23,23 +23,24 @@ API REST para conversión de divisas — Prueba Técnica OATI · UD
 
 ```
 currency-api/
-├── main.py                        # Punto de entrada FastAPI
+├── main.py                     
 ├── requirements.txt
 ├── README.md
-├── .env.example                   # Variables de entorno de ejemplo
+├── .env.example                
 ├── app/
-│   ├── database.py                # Configuración SQLAlchemy → SQL Server
-│   ├── seed.py                    # Datos iniciales (12 divisas)
+│   ├── database.py               
+│   ├── seed.py                
 │   ├── models/
-│   │   └── currency.py            # Entidad única: Currency
+│   │   └── currency.py            
 │   ├── schemas/
-│   │   └── currency.py            # Schemas Pydantic (request/response)
+│   │   └── currency.py          
 │   ├── services/
-│   │   └── currency_service.py    # Lógica de negocio
+│   │   └── currency_service.py    
 │   └── routers/
-│       └── currency_router.py     # Endpoints REST
+│       └── currency_router.py     
 └── static/
     └── index.html                 # Frontend SPA
+    └── estilos.css                 # Frontend css
 ```
 
 ---
@@ -51,10 +52,10 @@ Entidad **única**, tal como especifica el enunciado:
 ```sql
 CREATE TABLE currencies (
     id           INT           PRIMARY KEY IDENTITY(1,1),
-    code         VARCHAR(10)   NOT NULL UNIQUE,   -- "COP", "EUR"
-    name         VARCHAR(100)  NOT NULL,           -- "Peso Colombiano"
-    symbol       VARCHAR(10)   NOT NULL,           -- "$", "€"
-    rate_to_usd  FLOAT         NOT NULL,           -- tasa vs USD (base)
+    code         VARCHAR(10)   NOT NULL UNIQUE,  
+    name         VARCHAR(100)  NOT NULL,          
+    symbol       VARCHAR(10)   NOT NULL,          
+    rate_to_usd  FLOAT         NOT NULL,         
     created_at   DATETIME      DEFAULT GETDATE(),
     updated_at   DATETIME
 );
@@ -155,12 +156,3 @@ Content-Type: application/json
 USD · COP · EUR · BRL · MXN · GBP · JPY · CAD · ARS · CLP · PEN · CNY
 
 ---
-
-## Buenas Prácticas Aplicadas
-
-- Separación de capas: models / schemas / services / routers
-- Manejo de excepciones con HTTPException y códigos HTTP correctos
-- Validación de datos con Pydantic v2
-- Lógica de negocio desacoplada de los routers (patrón Service)
-- Seed automático sin duplicación en arranques repetidos
-- Configuración por variables de entorno (sin credenciales hardcodeadas)
