@@ -124,30 +124,6 @@ Al iniciar, SQLAlchemy crea la tabla automáticamente y carga **12 divisas** de 
 | DELETE | `/api/currencies/{id}` | Eliminar divisa |
 | POST | `/api/currencies/convert` | Convertir entre divisas |
 
-### Ejemplo: Conversión
-```http
-POST /api/currencies/convert
-Content-Type: application/json
-
-{
-  "amount": 1000.0,
-  "from_currency": "USD",
-  "to_currencies": ["COP", "EUR", "BRL"]
-}
-```
-
-**Respuesta:**
-```json
-{
-  "amount": 1000.0,
-  "from_currency": "USD",
-  "results": [
-    { "currency_code": "COP", "converted_amount": 4150000.0, "symbol": "$" },
-    { "currency_code": "EUR", "converted_amount": 920.0,     "symbol": "€" },
-    { "currency_code": "BRL", "converted_amount": 5050.0,    "symbol": "R$" }
-  ]
-}
-```
 
 ---
 
