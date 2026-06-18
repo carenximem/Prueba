@@ -1,4 +1,4 @@
-# 💱 Currency Converter API
+#  Conversion de devisaas
 
 API REST para conversión de divisas — Prueba Técnica OATI · UD  
 **Punto #2:** Servicio de conversión de divisas
