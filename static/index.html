@@ -171,10 +171,10 @@ const checked = [...document.querySelectorAll('#toCurrencies option:checked')].m
           rate_to_usd: parseFloat(document.getElementById('newRate').value)
         })
       });
-      alertEl.innerHTML = '<div class="alert alert-ok">✅ Divisa registrada exitosamente.</div>';
+      alertEl.innerHTML = '<div class="alert alert-ok"> Divisa registrada exitosamente.</div>';
       document.getElementById('addForm').reset();
     } catch (err) {
-      alertEl.innerHTML = `<div class="alert alert-err">❌ ${err.message}</div>`;
+      alertEl.innerHTML = `<div class="alert alert-err"> ${err.message}</div>`;
     }
   });
 
@@ -196,9 +196,9 @@ const checked = [...document.querySelectorAll('#toCurrencies option:checked')].m
       const code = document.getElementById('rateCode').value;
       const rate = parseFloat(document.getElementById('newRateValue').value);
       await api(`/code/${code}/rate?new_rate=${rate}`, { method: 'PATCH' });
-      alertEl.innerHTML = '<div class="alert alert-ok">✅ Tasa actualizada correctamente.</div>';
+      alertEl.innerHTML = '<div class="alert alert-ok"> Tasa actualizada correctamente.</div>';
     } catch (err) {
-      alertEl.innerHTML = `<div class="alert alert-err">❌ ${err.message}</div>`;
+      alertEl.innerHTML = `<div class="alert alert-err"> ${err.message}</div>`;
     }
   });
 
