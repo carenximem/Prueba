@@ -26,7 +26,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Currency Converter API",
     description=(
-        "API REST para conversión de divisas. Permite registrar monedas con sus tasas de cambio, "
+        "prueba tecnica API REST para conversión de divisas. Permite registrar monedas con sus tasas de cambio, "
         "consultar y modificar tasas, agregar o eliminar divisas, y convertir cantidades entre monedas."
     ),
     version="1.0.0",
