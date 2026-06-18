@@ -3,165 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Currency Converter · API</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --surface2: #232736;
-      --border: #2e3347;
-      --accent: #6c63ff;
-      --accent2: #a78bfa;
-      --green: #22c55e;
-      --red: #ef4444;
-      --text: #e2e8f0;
-      --muted: #8892aa;
-      --radius: 10px;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh;
-    }
-
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    header h1 { font-size: 1.25rem; font-weight: 700; color: var(--text); }
-    header span { font-size: 0.75rem; background: var(--accent); color: #fff;
-                  padding: 2px 8px; border-radius: 20px; font-weight: 600; }
-
-    nav {
-      display: flex;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-    }
-    nav button {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 0.45rem 1.1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.875rem;
-      transition: all 0.15s;
-    }
-    nav button.active, nav button:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-
-    main { padding: 2rem; max-width: 960px; margin: 0 auto; }
-
-    .section { display: none; }
-    .section.visible { display: block; }
-
-    h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: var(--accent2); }
-
-    /* Cards grid */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem;
-    }
-    .card .code { font-size: 1.5rem; font-weight: 800; color: var(--accent2); }
-    .card .name { font-size: 0.78rem; color: var(--muted); margin: 2px 0 8px; }
-    .card .rate { font-size: 0.9rem; color: var(--text); }
-    .card .rate span { color: var(--green); font-weight: 600; }
-    .card-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
-    .btn-sm {
-      flex: 1; padding: 5px 0; border: none; border-radius: 5px;
-      font-size: 0.75rem; cursor: pointer; font-weight: 600;
-    }
-    .btn-edit { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
-    .btn-edit:hover { border-color: var(--accent); color: var(--accent2); }
-    .btn-del { background: #2a1a1a; color: var(--red); border: 1px solid #3a1a1a; }
-    .btn-del:hover { background: var(--red); color: #fff; }
-
-    /* Forms */
-    form { background: var(--surface); border: 1px solid var(--border);
-           border-radius: var(--radius); padding: 1.5rem; max-width: 480px; }
-    label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; margin-top: 12px; }
-    label:first-child { margin-top: 0; }
-    input, select {
-      width: 100%; padding: 0.55rem 0.75rem;
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 6px; color: var(--text); font-size: 0.9rem;
-    }
-    input:focus, select:focus { outline: none; border-color: var(--accent); }
-    .btn-primary {
-      margin-top: 1.25rem; width: 100%;
-      background: var(--accent); color: #fff;
-      border: none; padding: 0.6rem; border-radius: 6px;
-      font-weight: 700; cursor: pointer; font-size: 0.95rem;
-    }
-    .btn-primary:hover { background: #5b52e0; }
-
-    /* Conversion results */
-    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.6rem; margin-top: 1rem; }
-    .result-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.85rem;
-      border-left: 3px solid var(--accent);
-    }
-    .result-card .r-code { font-size: 0.75rem; color: var(--muted); }
-    .result-card .r-amount { font-size: 1.3rem; font-weight: 800; color: var(--green); }
-    .result-card .r-name { font-size: 0.72rem; color: var(--muted); }
-
-    /* Multi select */
-    .checkboxes { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 6px; }
-    .checkboxes label {
-      margin: 0; display: flex; align-items: center; gap: 4px;
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 5px; padding: 4px 8px; cursor: pointer; font-size: 0.8rem;
-      color: var(--text);
-    }
-    .checkboxes input[type=checkbox] { width: auto; }
-    .checkboxes label:has(input:checked) {
-      border-color: var(--accent); background: #1e1b4b; color: var(--accent2);
-    }
-
-    .alert {
-      padding: 0.65rem 1rem; border-radius: 6px;
-      margin-bottom: 1rem; font-size: 0.875rem;
-    }
-    .alert-ok { background: #14291f; border: 1px solid #1a5c38; color: var(--green); }
-    .alert-err { background: #2a1111; border: 1px solid #5c1a1a; color: var(--red); }
-  </style>
+  <title>CONVERSION DE MONEDAS</title>
+<link rel="stylesheet" href="/static/estilos.css">
 </head>
 <body>
 
 <header>
-  <h1>💱 Currency Converter</h1>
+  <h1>CONVERSION DE MONEDAS</h1>
   <span>REST API</span>
 </header>
 
 <nav>
-  <button class="active" onclick="showSection('convert')">🔄 Convertir</button>
-  <button onclick="showSection('list')">📋 Divisas</button>
-  <button onclick="showSection('add')">➕ Agregar</button>
-  <button onclick="showSection('rate')">✏️ Editar Tasa</button>
+  <button class="active" onclick="showSection('convert')"> Convertir</button>
+  <button onclick="showSection('list')">Divisas</button>
+  <button onclick="showSection('add')"> Agregar</button>
+  <button onclick="showSection('rate')"> Editar Tasa</button>
 </nav>
 
 <main>
   <!-- CONVERTIR -->
   <div id="convert" class="section visible">
-    <h2>Convertir Divisas</h2>
+    <h2 class="title-convert">Convertir Divisas</h2>
+    <div style="display:flex; gap:1.5rem; align-items:flex-start; flex-wrap:wrap;">
     <form id="convertForm">
       <label>Cantidad (doble precisión)</label>
       <input type="number" id="amount" step="any" value="100" required />
@@ -169,23 +32,25 @@
       <label>Moneda de partida</label>
       <select id="fromCurrency"></select>
 
-      <label>Monedas de llegada</label>
-      <div class="checkboxes" id="toCurrencies"></div>
+  <label>Monedas de llegada <span style="color:#a78bfa; font-size:0.75rem"></span></label>
+      <select id="toCurrencies" multiple style="height: 160px;"></select>
 
       <button type="submit" class="btn-primary">Convertir</button>
     </form>
-    <div id="conversionResults" class="results-grid"></div>
+    </form>
+    <div id="conversionResults"></div>
+    </div>
   </div>
 
   <!-- LISTAR -->
   <div id="list" class="section">
-    <h2>Divisas Registradas</h2>
+    <h2 class="title-convert">Divisas Registradas</h2>
     <div id="currencyGrid" class="grid"></div>
   </div>
 
   <!-- AGREGAR -->
   <div id="add" class="section">
-    <h2>Agregar Nueva Divisa</h2>
+    <h2 class="title-convert">Agregar Nueva Divisa</h2>
     <div id="addAlert"></div>
     <form id="addForm">
       <label>Código (ej: CHF)</label>
@@ -202,7 +67,7 @@
 
   <!-- EDITAR TASA -->
   <div id="rate" class="section">
-    <h2>Actualizar Tasa de Cambio</h2>
+    <h2 class="title-convert">Actualizar Tasa de Cambio</h2>
     <div id="rateAlert"></div>
     <form id="rateForm">
       <label>Divisa</label>
@@ -240,9 +105,9 @@
     });
 
     // Populate TO checkboxes
-    const toDiv = document.getElementById('toCurrencies');
-    toDiv.innerHTML = currencies.map(c =>
-      `<label><input type="checkbox" value="${c.code}" /> ${c.code}</label>`
+    const toSelect = document.getElementById('toCurrencies');
+    toSelect.innerHTML = currencies.map(c =>
+      `<option value="${c.code}">${c.code} — ${c.name}</option>`
     ).join('');
 
     // Populate grid
@@ -275,7 +140,7 @@
     e.preventDefault();
     const amount = parseFloat(document.getElementById('amount').value);
     const fromCurrency = document.getElementById('fromCurrency').value;
-    const checked = [...document.querySelectorAll('#toCurrencies input:checked')].map(i => i.value);
+const checked = [...document.querySelectorAll('#toCurrencies option:checked')].map(i => i.value);
     if (!checked.length) { alert('Selecciona al menos una moneda de llegada'); return; }
 
     const data = await api('/convert', {

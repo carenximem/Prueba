@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SERVER   = os.getenv("DB_SERVER",   "localhost\\SQLEXPRESS")
+SERVER   = os.getenv("DB_SERVR",   "localhost\\SQLEXPRESS")
 DATABASE = os.getenv("DB_NAME",     "PRUEBATECNICA")
 DRIVER   = os.getenv("DB_DRIVER",   "ODBC Driver 17 for SQL Server")
 

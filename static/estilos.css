@@ -1,0 +1,489 @@
+
+/* RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* VARIABLES */
+:root{
+  --bg:#ffffff;
+  --surface:#1a1d27;
+  --surface2:#232736;
+  --border:#2e3347;
+  --accent:#adb0c5;
+  --accent3:#080808;
+    --accent2:#e7ecec;
+  --green:#22c55e;
+  --red:#ef4444;
+  --text:#e2e8f0;
+  --muted:#8892aa;
+  --radius:10px;
+}
+
+/* GENERAL */
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Segoe UI',system-ui,sans-serif;
+  min-height:100vh;
+}
+
+/* HEADER */
+header{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:1rem 2rem;
+
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+header h1{
+  font-size:1.25rem;
+  font-weight:700;
+  color:var(--text);
+}
+
+header span{
+  font-size:.75rem;
+  background:var(--accent);
+  color:#fff;
+
+  padding:2px 8px;
+  border-radius:20px;
+  font-weight:600;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  gap:.5rem;
+
+  padding:1rem 2rem;
+
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+
+nav button{
+  background:transparent;
+  border:1px solid var(--border);
+
+  color:var(--muted);
+
+  padding:.45rem 1.1rem;
+
+  border-radius:6px;
+
+  cursor:pointer;
+
+  font-size:.875rem;
+
+  transition:.15s;
+}
+
+nav button.active,
+nav button:hover{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+
+/* CONTENEDOR PRINCIPAL */
+main{
+  padding:2rem;
+
+  max-width:1400px;
+
+  margin:auto;
+}
+
+/* SECCIONES */
+.section{
+  display:none;
+}
+
+.section.visible{
+  display:block;
+}
+
+h2{
+  font-size:1.1rem;
+
+  font-weight:600;
+
+  margin-bottom:1.25rem;
+
+  color:var(--accent2);
+}
+
+/* GRID TARJETAS */
+.grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fill,minmax(220px,1fr));
+
+  gap:.75rem;
+}
+
+.card{
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  padding:1rem;
+}
+
+.card .code{
+  font-size:1.5rem;
+
+  font-weight:800;
+
+  color:var(--accent2);
+}
+
+.card .name{
+  font-size:.78rem;
+
+  color:var(--muted);
+
+  margin:2px 0 8px;
+}
+
+.card .rate{
+  font-size:.9rem;
+}
+
+.card .rate span{
+  color:var(--green);
+  font-weight:600;
+}
+
+.card-actions{
+  display:flex;
+
+  gap:.5rem;
+
+  margin-top:.75rem;
+}
+
+/* BOTONES */
+.btn-sm{
+  flex:1;
+
+  padding:5px 0;
+
+  border:none;
+
+  border-radius:5px;
+
+  font-size:.75rem;
+
+  cursor:pointer;
+
+  font-weight:600;
+}
+
+.btn-edit{
+  background:var(--surface2);
+
+  color:var(--text);
+
+  border:1px solid var(--border);
+}
+
+.btn-edit:hover{
+  border-color:var(--accent);
+
+  color:var(--accent2);
+}
+
+.btn-del{
+  background:#2a1a1a;
+
+  color:var(--red);
+
+  border:1px solid #3a1a1a;
+}
+
+.btn-del:hover{
+  background:var(--red);
+
+  color:#fff;
+}
+
+/* FORMULARIOS */
+form{
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  padding:1.5rem;
+
+  max-width:480px;
+}
+
+/* FORMULARIO CONVERSIÓN MÁS GRANDE */
+#convertForm{
+  width:650px;
+
+  max-width:none;
+
+  flex-shrink:0;
+}
+
+label{
+  display:block;
+
+  font-size:.8rem;
+
+  color:var(--muted);
+
+  margin-bottom:4px;
+
+  margin-top:12px;
+}
+
+label:first-child{
+  margin-top:0;
+}
+
+input,
+select{
+  width:100%;
+
+  padding:.55rem .75rem;
+
+  background:var(--surface2);
+
+  border:1px solid var(--border);
+
+  border-radius:6px;
+
+  color:var(--text);
+
+  font-size:.9rem;
+}
+
+input:focus,
+select:focus{
+  outline:none;
+
+  border-color:var(--accent);
+}
+
+/* MULTISELECT */
+#toCurrencies{
+  height:220px;
+}
+
+.btn-primary{
+  margin-top:1.25rem;
+
+  width:100%;
+
+  background:var(--accent);
+
+  color:#fff;
+
+  border:none;
+
+  padding:.6rem;
+
+  border-radius:6px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  font-size:.95rem;
+}
+
+.btn-primary:hover{
+  background:#5b52e0;
+}
+
+/* RESULTADOS */
+#conversionResults{
+  flex:1;
+
+  min-width:500px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fill,minmax(240px,1fr));
+
+  gap:.8rem;
+
+  align-content:start;
+}
+
+.result-card{
+  background:var(--surface2);
+
+  border:1px solid var(--border);
+
+  border-left:4px solid var(--accent);
+
+  border-radius:8px;
+
+  padding:1rem;
+
+  min-height:120px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+.result-card .r-code{
+  font-size:.8rem;
+
+  color:var(--muted);
+}
+
+.result-card .r-amount{
+  font-size:1.5rem;
+
+  font-weight:800;
+
+  color:var(--green);
+
+  margin:.4rem 0;
+}
+
+.result-card .r-name{
+  font-size:.8rem;
+
+  color:var(--muted);
+}
+
+/* CHECKBOX */
+.checkboxes{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:.5rem;
+
+  margin-top:6px;
+}
+
+.checkboxes label{
+  margin:0;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:4px;
+
+  background:var(--surface2);
+
+  border:1px solid var(--border);
+
+  border-radius:5px;
+
+  padding:4px 8px;
+
+  cursor:pointer;
+
+  color:var(--text);
+
+  font-size:.8rem;
+}
+
+.checkboxes input[type=checkbox]{
+  width:auto;
+}
+
+/* ALERTAS */
+.alert{
+  padding:.65rem 1rem;
+
+  border-radius:6px;
+
+  margin-bottom:1rem;
+
+  font-size:.875rem;
+}
+
+.alert-ok{
+  background:#14291f;
+
+  border:1px solid #1a5c38;
+
+  color:var(--green);
+}
+
+.alert-err{
+  background:#2a1111;
+
+  border:1px solid #5c1a1a;
+
+  color:var(--red);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+  #convertForm{
+    width:100%;
+  }
+
+  #conversionResults{
+    min-width:100%;
+  }
+
+}
+
+.title-convert{
+    text-align: center;
+
+    font-size: 1.5rem;
+
+    font-weight: 800;
+
+    color: var(--accent3);
+
+    margin-bottom: 2rem;
+
+    letter-spacing: 1px;
+
+    position: relative;
+
+    text-transform: uppercase;
+
+    text-shadow: 0 0 18px rgba(7, 7, 7, 0.35);
+}
+
+.title-convert::after{
+    content: "";
+
+    display: block;
+
+    width: 120px;
+
+    height: 4px;
+
+    margin: 12px auto 0;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--accent),
+        var(--accent2)
+    );
+}
